@@ -23,68 +23,69 @@ int main(int argc, char *argv[])
     }
     for(int ii=0;ii<i;ii++){
         for(int jj=0;jj<j;jj++){
+            int num = array[ii*j+jj];
             if(ii!=0&&ii!=i-1){
                 if(jj!=0&&jj!=j-1){
-                    if(array[ii*j+jj] >= array[ii*j+jj-1] &&
-                       array[ii*j+jj] >= array[ii*j+jj+1] &&
-                       array[ii*j+jj] >= array[(ii-1)*j+jj] &&
-                       array[ii*j+jj] >= array[(ii+1)*j+jj]){
+                    if(num >= array[ii*j+jj-1] &&
+                       num >= array[ii*j+jj+1] &&
+                       num >= array[(ii-1)*j+jj] &&
+                       num >= array[(ii+1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }else if(jj==0){
-                    if(array[ii*j+jj] >= array[ii*j+jj+1] &&
-                       array[ii*j+jj] >= array[(ii-1)*j+jj] &&
-                       array[ii*j+jj] >= array[(ii+1)*j+jj]){
+                    if(num >= array[ii*j+jj+1] &&
+                       num >= array[(ii-1)*j+jj] &&
+                       num >= array[(ii+1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }else if(jj==j-1){
-                    if(array[ii*j+jj] >= array[ii*j+jj-1] &&
-                       array[ii*j+jj] >= array[(ii-1)*j+jj] &&
-                       array[ii*j+jj] >= array[(ii+1)*j+jj]){
+                    if(num >= array[ii*j+jj-1] &&
+                       num >= array[(ii-1)*j+jj] &&
+                       num >= array[(ii+1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }
             }else if(ii==0){
                 if(jj!=0&&jj!=j-1){
-                    if(array[ii*j+jj] >= array[ii*j+jj-1] &&
-                       array[ii*j+jj] >= array[ii*j+jj+1] &&
-                       array[ii*j+jj] >= array[(ii+1)*j+jj]){
+                    if(num >= array[ii*j+jj-1] &&
+                       num >= array[ii*j+jj+1] &&
+                       num >= array[(ii+1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }else if(jj==0){
-                    if(array[ii*j+jj] >= array[ii*j+jj+1] &&
-                       array[ii*j+jj] >= array[(ii+1)*j+jj]){
+                    if(num >= array[ii*j+jj+1] &&
+                       num >= array[(ii+1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }else if(jj==j-1){
-                    if(array[ii*j+jj] >= array[ii*j+jj-1] &&
-                       array[ii*j+jj] >= array[(ii+1)*j+jj]){
+                    if(num >= array[ii*j+jj-1] &&
+                       num >= array[(ii+1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }
             }else if(ii==i-1){
                 if(jj!=0&&jj!=j-1){
-                    if(array[ii*j+jj] >= array[ii*j+jj-1] &&
-                       array[ii*j+jj] >= array[ii*j+jj+1] &&
-                       array[ii*j+jj] >= array[(ii-1)*j+jj]){
+                    if(num >= array[ii*j+jj-1] &&
+                       num >= array[ii*j+jj+1] &&
+                       num >= array[(ii-1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }else if(jj==0){
-                    if(array[ii*j+jj] >= array[ii*j+jj+1] &&
-                       array[ii*j+jj] >= array[(ii-1)*j+jj]){
+                    if(num >= array[ii*j+jj+1] &&
+                       num >= array[(ii-1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
                 }else if(jj==j-1){
-                    if(array[ii*j+jj] >= array[ii*j+jj-1] &&
-                       array[ii*j+jj] >= array[(ii-1)*j+jj]){
+                    if(num >= array[ii*j+jj-1] &&
+                       num >= array[(ii-1)*j+jj]){
                         cou++;
                         slot.push(make_pair<int,int>(ii+1,jj+1));
                     }
@@ -97,7 +98,6 @@ int main(int argc, char *argv[])
     buffer = ".\\"+buffer+"\\final.peak";
     file2.open(buffer,ios::out);
     file2<<cou<<endl;
-    //file2<<"test"<<endl;
     while(!slot.empty()){
         if(slot.size()!=1){
             file2<<slot.front().first<<' '<<slot.front().second<<endl;
@@ -108,9 +108,6 @@ int main(int argc, char *argv[])
             slot.pop();
         }
     }
-    /*for(int a=0;a<i*j;a++){
-        delete array+a;
-    }*/
     delete [] array;
     return 0;
 }
